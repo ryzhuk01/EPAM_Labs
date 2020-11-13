@@ -7,12 +7,11 @@ import model.ExperimentalTypes;
 
 public class ExperimentalPlane extends Plane{
 
-    private ExperimentalTypes experimentalType;
     private ClassificationLevel classificationLevel;
 
     public ExperimentalPlane(String Planemodel, int maxSpeed, int maxFlightDistance, int maxLoadCapacity, ExperimentalTypes type, ClassificationLevel classificationLevel) {
         super(Planemodel, maxSpeed, maxFlightDistance, maxLoadCapacity);
-        this.experimentalType = type;
+
         this.classificationLevel = classificationLevel;
     }
 

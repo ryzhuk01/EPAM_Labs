@@ -44,7 +44,6 @@ import java.util.Objects;
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (!(o instanceof Plane)) return false;
         Plane currentplane = (Plane) o;
         return maxSpeed == currentplane.maxSpeed &&
