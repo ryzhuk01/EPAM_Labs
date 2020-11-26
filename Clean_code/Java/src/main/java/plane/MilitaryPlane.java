@@ -39,6 +39,7 @@ public class MilitaryPlane extends Plane{
         MilitaryPlane that = (MilitaryPlane) o;
         return militaryType == that.militaryType;
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), militaryType);
