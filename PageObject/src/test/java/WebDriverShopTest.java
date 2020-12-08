@@ -9,7 +9,6 @@ import page.GoodPage;
 
 
 public class WebDriverShopTest {
-
     private WebDriver driver;
 
     @BeforeTest(alwaysRun = true)
@@ -25,7 +24,6 @@ public class WebDriverShopTest {
 
     @Test
     public void addingSneakersTest() {
-
         CartPage cartPage = new GoodPage(driver)
                 .openPage()
                 .selectedSneakersSize()
@@ -35,11 +33,8 @@ public class WebDriverShopTest {
         org.junit.Assert.assertTrue(cartPage.getSneakersArticle().contains(Article.US1.getArticle()));
     }
 
-
     @Test
     public void cartAfterDeleting(){
-
-
         CartPage cartPage = new GoodPage(driver)
                 .openPage()
                 .selectedSneakersSize()

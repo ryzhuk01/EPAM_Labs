@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class AbstractPage {
-
     protected WebDriver driver;
     protected static final String GOOD_URL = "https://joma.by/item-shops/n10s-2017-fg-butsy-dlya-tverdykh-poley-numero-10";
     protected final long WAIT_TIME_SECONDS = 20;
@@ -15,8 +14,6 @@ public abstract class AbstractPage {
     public AbstractPage(WebDriver driver) {
         this.driver = driver;
     }
-
-
 
     public CartPage openCart() {
         WebElement cartButtonGoTo = waitForElementLocatedBy(driver,

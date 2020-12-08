@@ -1,7 +1,6 @@
 package model;
 
 public enum  Size {
-
     RU35("35"),
     RU36("36"),
     RU37("37"),

@@ -19,10 +19,7 @@ public class CartPage extends AbstractPage {
 
     public String actualSizeSelected() {
         return waitForElementLocatedBy(driver, By.xpath(sizeSelected), WAIT_TIME_SECONDS).getText();
-
     }
-
-
 
     public CartPage deleteFromCart() {
         WebElement deleteButton = waitForElementLocatedBy(driver,
@@ -30,6 +27,7 @@ public class CartPage extends AbstractPage {
         deleteButton.click();
         return this;
     }
+
     public String checkCart() {
         return waitForElementLocatedBy(driver,
                 By.xpath(checkCart), WAIT_TIME_SECONDS).getText();

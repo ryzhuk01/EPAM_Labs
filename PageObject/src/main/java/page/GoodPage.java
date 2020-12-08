@@ -10,13 +10,10 @@ public class GoodPage extends AbstractPage{
 
     public GoodPage(WebDriver driver){super(driver);}
 
-
     public GoodPage openPage() {
         driver.get(GOOD_URL);
         return this;
     }
-
-
 
     public GoodPage selectedSneakersSize() {
         WebElement sneakersSize = waitForElementLocatedBy(driver,
@@ -25,12 +22,10 @@ public class GoodPage extends AbstractPage{
         return this;
     }
 
-
     public GoodPage addToCart() {
         WebElement cartButton = waitForElementLocatedBy(driver,
                 By.xpath(addToCart), WAIT_TIME_SECONDS);
         cartButton.click();
         return this;
     }
-
 }
