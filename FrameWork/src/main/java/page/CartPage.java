@@ -64,32 +64,43 @@ public class CartPage extends AbstractPage {
     public String actualSizeSelected() {
         return waitForElementLocatedBy(driver, By.xpath(sizeSelected), WAIT_TIME_SECONDS).getText();
     }
-
     public CartPage deleteFromCart() {
         WebElement deleteButton = waitForElementLocatedBy(driver,
                 By.xpath(deleteFromCart),WAIT_TIME_SECONDS);
         deleteButton.click();
         return this;
     }
+    public CartPage showPromoField(){
+        WebElement showPromoFieldButton = waitForElementLocatedBy(driver,
+                By.xpath(showPromoField),WAIT_TIME_SECONDS);
+        showPromoFieldButton.click();
+        return this;
+    }
+    public CartPage confirmPromo(){
+        WebElement addPromoButton = waitForElementLocatedBy(driver,
+                By.xpath(enterPromo),WAIT_TIME_SECONDS);
+        addPromoButton.click();
+        return this;
+    }
     public CartPage typePromo(User user){
 
-        WebElement showPromoFieldButton = waitForElementLocatedBy(driver,
+        /*WebElement showPromoFieldButton = waitForElementLocatedBy(driver,
                 By.xpath(showPromoField),WAIT_TIME_SECONDS);
 
         showPromoFieldButton.click();
-
+*/
         priceBefore=getSummaryPriceBefore();
 
         WebElement promocode = waitForElementLocatedBy(driver,
                 By.xpath(promoField),WAIT_TIME_SECONDS);
-
         promocode.sendKeys(user.getPromo());
+/*
 
-        logger.info("first" + promocode.getText());
         WebElement addPromoButton = waitForElementLocatedBy(driver,
                 By.xpath(enterPromo),WAIT_TIME_SECONDS);
         addPromoButton.click();
-        logger.info(priceAfter);
+*/
+
         return this;
     }
 

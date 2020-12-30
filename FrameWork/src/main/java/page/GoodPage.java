@@ -12,7 +12,6 @@ import org.openqa.selenium.support.FindBy;
 public class GoodPage extends AbstractPage{
     @FindBy(xpath ="//*[@action=\\\"https://www.facebook.com/tr/\\\"]")
     private WebElement invalidSending;
-
     private final String countField= "//input[@class='qt form-control']";
     private final String validSending= "//img[@src='/images/ok.png']";
     private final String sendRequest= "//*[@type='submit'][@class ='blueButton']";
@@ -22,12 +21,8 @@ public class GoodPage extends AbstractPage{
     private final String findOutPrice= "//a[@name='popup-click']";
     private final String selectedSneakersSize= "//*[@idinner='102640']";
     private final String selectedSecondSneakersSize= "//*[@idinner='102409']";
-
-
     private final String addToCart ="//*[@id=\"active\"]/div[2]/a/span";
-
     private final Logger logger = LogManager.getRootLogger();
-
 
     public GoodPage(WebDriver driver){super(driver);}
 
@@ -35,8 +30,6 @@ public class GoodPage extends AbstractPage{
         driver.get(path);
         return this;
     }
-
-
     public GoodPage selectedSecondSneakersSize() {
         WebElement sneakersSize = waitForElementLocatedBy(driver,
                 By.xpath(selectedSecondSneakersSize),WAIT_TIME_SECONDS);
@@ -44,7 +37,6 @@ public class GoodPage extends AbstractPage{
         sneakersSize.click();
         return this;
     }
-
     public GoodPage selectedSneakersSize() {
         WebElement sneakersSize = waitForElementLocatedBy(driver,
                 By.xpath(selectedSneakersSize),WAIT_TIME_SECONDS);
@@ -52,7 +44,6 @@ public class GoodPage extends AbstractPage{
         sneakersSize.click();
         return this;
     }
-
     public GoodPage addToCart() {
         WebElement cartButton = waitForElementLocatedBy(driver,
                 By.xpath(addToCart), WAIT_TIME_SECONDS);
@@ -101,14 +92,11 @@ public class GoodPage extends AbstractPage{
 
         return this;
     }
-
-
     public boolean checkValidSending(){
 
         return (waitForElementLocatedBy(driver,
                 By.xpath(validSending), WAIT_TIME_SECONDS).isDisplayed());
     }
-
     public WebElement checkInvalidSending(){
         return invalidSending;
     }

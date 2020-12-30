@@ -10,20 +10,15 @@ import page.CartPage;
 import page.GoodPage;
 import service.GoodCreator;
 import service.UserCreactor;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.*;
-import static page.CartPage.priceAfter;
 import static page.CartPage.priceBefore;
 
 public class WebDriverShopTest extends CommonConditions {
-
     private final Logger logger = LogManager.getRootLogger();
 
-    //1
-
-        @Test
+        @Test(priority = 1)
         public void addingSneakersTest() {
             Good testGood = GoodCreator.withCredentialsFromProperty();
             CartPage cartPage = new GoodPage(driver)
@@ -39,8 +34,8 @@ public class WebDriverShopTest extends CommonConditions {
             assertThat(cartPage.getSneakersPrice(),is(equalTo(testGood.getPrice())));
 
         }
-    //2
-        @Test
+
+        @Test(priority = 2)
         public void addingSomeSneakersTest() {
             Good testGood = GoodCreator.withCredentialsFromProperty();
             Good secondTestGood = GoodCreator.secondWithCredentialsFromProperty();
@@ -54,20 +49,17 @@ public class WebDriverShopTest extends CommonConditions {
                     .openCart();
             logger.info("first" + cartPage.getSecondSneakersArticle() +
                     "second" + secondTestGood.getArticle());
-
             assertThat(cartPage.actualSecondSizeSelected(),containsString(secondTestGood.getSize()));
             assertThat(cartPage.getSecondSneakersCount(),is(equalTo(secondTestGood.getCount())));
             assertThat(cartPage.getSecondSneakersArticle(),is(equalTo(secondTestGood.getArticle())));
             assertThat(cartPage.getSecondSneakersPrice(),is(equalTo(secondTestGood.getPrice())));
-
             assertThat(cartPage.actualSizeSelected(),containsString(testGood.getSize()));
             assertThat(cartPage.getSneakersArticle(),is(equalTo(testGood.getArticle())));
             assertThat(cartPage.getSneakersCount(),is(equalTo(testGood.getCount())));
             assertThat(cartPage.getSneakersPrice(),is(equalTo(testGood.getPrice())));
         }
 
-    //3
-        @Test
+        @Test(priority = 3)
         public void cartAfterDeleting(){
             Good testGood = GoodCreator.withCredentialsFromProperty();
             CartPage cartPage = new GoodPage(driver)
@@ -75,7 +67,6 @@ public class WebDriverShopTest extends CommonConditions {
                     .selectedSneakersSize()
                     .addToCart()
                     .openCart();
-
             assertThat(cartPage.actualSizeSelected(),containsString(testGood.getSize()));
             assertThat(cartPage.getSneakersArticle(),is(equalTo(testGood.getArticle())));
             assertThat(cartPage.getSneakersCount(),is(equalTo(testGood.getCount())));
@@ -83,8 +74,7 @@ public class WebDriverShopTest extends CommonConditions {
                     cartPage.deleteFromCart();
             Assert.assertEquals("Ваша корзина пуста!",cartPage.checkCart());
         }
-    //4
-    @Test
+    @Test(priority = 4)
     public void checkingInvalidPromoTest() {
         Good testGood = GoodCreator.withCredentialsFromProperty();
         User promo = UserCreactor.createInvalidUser();
@@ -93,20 +83,16 @@ public class WebDriverShopTest extends CommonConditions {
                 .selectedSneakersSize()
                 .addToCart()
                 .openCart();
-
         assertThat(cartPage.actualSizeSelected(),containsString(testGood.getSize()));
         assertThat(cartPage.getSneakersArticle(),is(equalTo(testGood.getArticle())));
         assertThat(cartPage.getSneakersCount(),is(equalTo(testGood.getCount())));
         assertThat(cartPage.getSneakersPrice(),is(equalTo(testGood.getPrice())));
-
-                cartPage.typePromo(promo);
+                cartPage.showPromoField()
+                .typePromo(promo)
+                .confirmPromo();
         assertThat(priceBefore,is(equalTo(cartPage.getSummaryInvalidPrice())));
-
     }
-
-
-    //5
-     @Test
+     @Test(priority = 5)
     public void checkingValidPromoTest() {
         Good testGood = GoodCreator.withCredentialsFromProperty();
         User validPromo = UserCreactor.createValidUser();
@@ -115,18 +101,18 @@ public class WebDriverShopTest extends CommonConditions {
                 .selectedSneakersSize()
                 .addToCart()
                 .openCart();
-
         assertThat(cartPage.actualSizeSelected(),containsString(testGood.getSize()));
         assertThat(cartPage.getSneakersArticle(),is(equalTo(testGood.getArticle())));
         assertThat(cartPage.getSneakersCount(),is(equalTo(testGood.getCount())));
         assertThat(cartPage.getSneakersPrice(),is(equalTo(testGood.getPrice())));
-
-                cartPage.typePromo(validPromo);
+         cartPage.showPromoField()
+                 .typePromo(validPromo)
+                 .confirmPromo();
         assertThat(priceBefore,not(cartPage.getSummaryValidPrice()));
 
     }
-    //6
-    @Test
+
+    @Test(priority = 6)
     public void checkValidEmailTest() {
         Good testGood = GoodCreator.withCredentialsFromProperty();
         User validUser = UserCreactor.createValidUser();
@@ -137,11 +123,10 @@ public class WebDriverShopTest extends CommonConditions {
                 .typeFirstName(validUser)
                 .typeTelephone(validUser)
                 .sendRequest();
-
         assertTrue(cartPage.checkValidSending());
     }
-    //7
-    @Test
+
+    @Test(priority = 7)
     public void CheckInvalidEmailTest() {
         Good testGood = GoodCreator.withCredentialsFromProperty();
         User inValidUser = UserCreactor.createInvalidUser();
@@ -154,8 +139,8 @@ public class WebDriverShopTest extends CommonConditions {
                 .sendRequest();
         assertNull(cartPage.checkInvalidSending());
     }
-//8
-    @Test
+
+    @Test(priority = 8)
     public void checkWholesaleOrderingInShop() {
         Good testGood = GoodCreator.withCredentialsFromProperty();
         CartPage cartPage = new GoodPage(driver)
@@ -164,7 +149,6 @@ public class WebDriverShopTest extends CommonConditions {
                 .typeCount(testGood)
                 .addToCart()
                 .openCart();
-
         assertThat(cartPage.actualSizeSelected(), containsString(testGood.getSize()));
         assertThat(cartPage.getSneakersArticle(), is(equalTo(testGood.getArticle())));
         assertThat(cartPage.getSneakersCount(), is(equalTo(testGood.getOptCount())));
@@ -172,8 +156,7 @@ public class WebDriverShopTest extends CommonConditions {
     }
 
 
-    //9
-    @Test
+    @Test(priority = 9)
     public void checkWholesaleOrderingInOpt() {
         Good testGood = GoodCreator.withCredentialsFromProperty();
         CartPage cartPage = new GoodPage(driver)
@@ -182,15 +165,13 @@ public class WebDriverShopTest extends CommonConditions {
                 .typeCount(testGood)
                 .addToCart()
                 .openCart();
-
         assertThat(cartPage.actualSizeSelected(), containsString(testGood.getSize()));
         assertThat(cartPage.getSneakersArticle(), is(equalTo(testGood.getArticle())));
         assertThat(cartPage.getSneakersCount(), is(equalTo(testGood.getOptCount())));
         assertThat(cartPage.getSummaryInvalidPrice(), not(equalTo(testGood.getFinalPrice())));
     }
 
-//10
-     @Test
+     @Test(priority = 10)
     public void checkOrderingInOpt() {
         Good testGood = GoodCreator.withCredentialsFromProperty();
         CartPage cartPage = new GoodPage(driver)
@@ -198,13 +179,9 @@ public class WebDriverShopTest extends CommonConditions {
                 .selectedSneakersSize()
                 .addToCart()
                 .openCart();
-
         assertThat(cartPage.actualSizeSelected(),containsString(testGood.getSize()));
         assertThat(cartPage.getSneakersArticle(),is(equalTo(testGood.getArticle())));
         assertThat(cartPage.getSneakersCount(),is(equalTo(testGood.getCount())));
         assertThat(cartPage.getSneakersPrice(),is(equalTo(testGood.getPrice())));
     }
-
-
-
 }

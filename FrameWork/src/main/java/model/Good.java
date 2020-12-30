@@ -26,31 +26,24 @@ public class Good {
     public String getSize(){
         return size;
     }
-
     public void setSize(String size) {
         this.size = size;
     }
-
     public String getArticle() {
         return article;
     }
-
     public void setArticle(String article) {
         this.article = article;
     }
-
     public String getCount() {
         return count;
     }
-
     public void setCount(String count) {
         this.count = count;
     }
-
     public String getPrice() {
         return price;
     }
-
     public void setPrice(String price) {
         this.price = price;
     }
